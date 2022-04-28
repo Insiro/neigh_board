@@ -1,0 +1,5 @@
+FROM ubuntu/nginx
+
+RUN apt-get update && apt-get install -y vim mysql-server curl
+ADD ./ /neigh_board
+WORKDIR /neigh_board
