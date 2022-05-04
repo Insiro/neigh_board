@@ -40,7 +40,6 @@
     "vue-jest": "^3.0.7",
     "vue-tsc": "^0.34.7"
   },
-  "main": "index.js",
   "license": "MIT",
   "packageManager": "yarn@3.2.0"
 }
