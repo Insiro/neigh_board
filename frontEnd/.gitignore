@@ -378,3 +378,5 @@ yarn-error.log
 # .pnp.*
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,eclipse,intellij,vue,vuejs,node,yarn
+
+!.vscode/vetur/snippets/

@@ -1,5 +1,6 @@
 // vetur.config.js
 /** @type {import('vls').VeturConfig} */
+const path = require("path");
 module.exports = {
   // **optional** default: `{}`
   // override vscode settings
@@ -12,12 +13,12 @@ module.exports = {
   // **optional** default: `[{ root: './' }]`
   // support monorepos
   projects: [
-    "./packages/repo2", // Shorthand for specifying only the project root location
+    "./", // Shorthand for specifying only the project root location
     {
       // **required**
       // Where is your project?
       // It is relative to `vetur.config.js`.
-      root: "./packages/repo1",
+      root: "./",
       // **optional** default: `'package.json'`
       // Where is `package.json` in the project?
       // We use it to determine the version of vue.
