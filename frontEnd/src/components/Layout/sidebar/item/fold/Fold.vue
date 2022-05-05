@@ -7,14 +7,16 @@
       data-target="#collapseTwo"
       aria-expanded="true"
       aria-controls="collapseTwo"
+      @click="toggle()"
     >
-      <slot />
+      <slot name="default" />
     </a>
     <div
       id="collapseTwo"
       class="collapse"
       aria-labelledby="headingTwo"
       data-parent="#accordionSidebar"
+      :class="[toggle ? show : blank]"
     >
       <div class="bg-white py-2 collapse-inner rounded">
         <slot name="content" />
@@ -24,5 +26,13 @@
 </template>
 <script lang="ts">
 import { Vue } from "vue-class-component";
-export default class Component extends Vue {}
+import { ref } from "vue";
+export default class Component extends Vue {
+  ShowMenu = false;
+  show = ref("show");
+  blank = ref("");
+  toggle() {
+    this.ShowMenu = !this.ShowMenu;
+  }
+}
 </script>
