@@ -16,7 +16,7 @@
       class="collapse"
       aria-labelledby="headingTwo"
       data-parent="#accordionSidebar"
-      :class="[toggle ? show : blank]"
+      :class="[ShowMenu ? show : blank]"
     >
       <div class="bg-white py-2 collapse-inner rounded">
         <slot name="content" />
