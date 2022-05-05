@@ -28,10 +28,10 @@
     <Fold>
       <template #default>
         <i class="fas fa-fw fa-cog"></i>
-        <span>Components</span>
+        <span>Fold Menu</span>
       </template>
       <template #content>
-        <FoldHeader>Custom Components:</FoldHeader>
+        <FoldHeader>Fold Items:</FoldHeader>
         <FoldItem>FoldItem</FoldItem>
       </template>
     </Fold>
