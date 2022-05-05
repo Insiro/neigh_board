@@ -7,7 +7,7 @@ module.exports = {
   // Notice: It only affects the settings used by Vetur.
   settings: {
     "vetur.useWorkspaceDependencies": true,
-    "vetur.experimental.templateInterpolationService": true,
+    "vetur.experimental.templateInterpolationService": false,
     "typescript.tsdk": path.resolve(__dirname, ".yarn/sdks/typescript/bin"),
   },
   // **optional** default: `[{ root: './' }]`
