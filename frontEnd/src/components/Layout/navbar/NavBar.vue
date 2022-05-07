@@ -51,7 +51,7 @@
           <span class="mr-2 d-none d-lg-inline text-gray-600 small"
             >User Name</span
           >
-          <img class="img-profile rounded-circle" src="user.svg" />
+          <img class="img-profile rounded-circle" src="/user.svg" />
         </template>
         <template #content>
           <DropDownItem>
