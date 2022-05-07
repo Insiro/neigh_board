@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <Layout> neigh baord </Layout>
-  </div>
+  <Layout>
+    <router-view />
+  </Layout>
 </template>
 
 <script lang="ts">
