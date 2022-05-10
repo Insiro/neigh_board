@@ -904,10 +904,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/marked@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "@types/marked@npm:4.0.3"
-  checksum: 2fc409a6291cb770688731a444f54e7eab6257c9b565dea4e9d2f3b6654b606e9dd8ea4a924e306b2d2f581dedcb7a27f10f2ca7aed828b11642ab85955341f1
+"@types/marked@npm:^3.0.1":
+  version: 3.0.3
+  resolution: "@types/marked@npm:3.0.3"
+  checksum: 42d859c2e4b38d738dd09a3d90b695e1188f975c82e40d122cf5f40bf2f52b0f9c5815b217eeb01a5a5549c6cf3a5f2b291478a505d4832f813af22e3040ff00
   languageName: node
   linkType: hard
 
@@ -4241,7 +4241,7 @@ __metadata:
   resolution: "neight_board_fe@workspace:."
   dependencies:
     "@types/jest": ^27.5.0
-    "@types/marked": ^4.0.3
+    "@types/marked": ^3.0.1
     "@typescript-eslint/eslint-plugin": ^5.22.0
     "@typescript-eslint/parser": ^5.22.0
     "@vitejs/plugin-vue": ^2.3.1

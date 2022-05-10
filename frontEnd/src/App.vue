@@ -1,12 +1,17 @@
 <template>
-  <Layout>
+  <component :is="layout">
     <router-view />
-  </Layout>
+  </component>
 </template>
 
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
-import Layout from "./components/Layout";
-@Options({ components: { Layout } })
-export default class App extends Vue {}
+import { useRoute } from "vue-router";
+import { Layout, EmptyLayout } from "./components/Layout";
+@Options({ components: { Layout, EmptyLayout } })
+export default class App extends Vue {
+  get layout(): string {
+    return useRoute().meta.noLayout === true ? "EmptyLayout" : "Layout";
+  }
+}
 </script>
