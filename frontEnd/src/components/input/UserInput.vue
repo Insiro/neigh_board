@@ -1,6 +1,6 @@
 <template>
   <input
-    v-model="value"
+    :value="value"
     class="form-control form-control-user"
     :type="type"
     :placeholder="placeholder"
