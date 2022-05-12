@@ -7,10 +7,18 @@
       <form class="user">
         <UserInput
           class="form-group"
-          type="email"
-          placeholder="Enter Email Address..."
+          type="text"
+          placeholder="Enter ID..."
+          :value="id"
+          @updates="idChanged"
         />
-        <UserInput class="form-group" type="password" placeholder="Password" />
+        <UserInput
+          class="form-group"
+          type="password"
+          placeholder="Password"
+          :value="pwd"
+          @updates="pwdChanged"
+        />
         <!-- remember id-->
         <div class="form-group custom-control custom-checkbox small">
           <input
@@ -22,11 +30,7 @@
             >Remember Me</label
           >
         </div>
-        <button
-          href="index.html"
-          class="btn btn-primary btn-user btn-block"
-          @click="singIn()"
-        >
+        <button class="btn btn-primary btn-user btn-block" @click="singIn()">
           Login
         </button>
       </form>
@@ -35,7 +39,7 @@
         <a class="small" href="forgot-password.html">Forgot Password?</a>
       </div> -->
       <div class="text-center">
-        <router-link to="register">Create an Account!</router-link>
+        <router-link to="regist">Create an Account!</router-link>
       </div>
     </div>
   </div>
@@ -46,8 +50,16 @@ import UserInput from "@/components/input/UserInput.vue";
 @Options({ components: { UserInput } })
 export default class Component extends Vue {
   remember: boolean = false;
+  id = "";
+  pwd = "";
   singIn() {
     //TODO
+  }
+  idChanged(data: string) {
+    this.id = data;
+  }
+  pwdChanged(data: string) {
+    this.pwd = data;
   }
 }
 </script>
