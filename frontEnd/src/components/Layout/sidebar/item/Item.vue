@@ -1,6 +1,6 @@
 <template>
   <li class="nav-item">
-    <router-link class="nav-link" :to="link">
+    <router-link class="nav-link" :to="to">
       <slot />
     </router-link>
   </li>
@@ -8,7 +8,7 @@
 <script lang="ts">
 import { prop, Vue } from "vue-class-component";
 class Props {
-  link = prop<string>({
+  to = prop<string>({
     default: "",
   });
 }
