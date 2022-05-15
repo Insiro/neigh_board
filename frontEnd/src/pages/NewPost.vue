@@ -1,7 +1,7 @@
 <template>
-  <div class="d-flex flex-row h-full">
-    <div :class="BoxStyle" />
-    <div class="flex flex-col h-full postItem flex-grow">
+  <div class="d-flex flex-row w-100">
+    <div class="flex-grow-1" />
+    <div class="postItem contentWrapper">
       <div class="flex mt-3 postItem flex-row">
         <UserInput
           placeholder="제목"
@@ -11,29 +11,25 @@
         />
       </div>
 
-      <WideFrame class="flex-grow postItem">
+      <div class="postItem mt-5 w-100 contentWrapper">
         <textarea
           v-model="content"
-          class="h-full w-full"
+          class="h-100 w-100"
           placeholder="게시글을 입력하세요"
-        ></textarea>
-      </WideFrame>
-      <Button class="flex-grow-0 mt-5 postItem" @Click="submitPost"
-        >게시</Button
-      >
+        />
+      </div>
+      <Button class="mt-5 postItem" @click="submitPost"> 게시 </Button>
     </div>
-    <div :class="BoxStyle" />
+    <div class="flex-grow-1" />
   </div>
 </template>
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
-import { ref } from "vue";
 import UserInput from "@/components/input/UserInput.vue";
 @Options({ components: { UserInput } })
 export default class NewPost extends Vue {
   title = "";
   content = "";
-  BoxStyle = ref("flex-grow BOX");
   onTitleChanged(title: string) {
     this.title = title;
   }
@@ -42,3 +38,14 @@ export default class NewPost extends Vue {
   }
 }
 </script>
+<style scopped>
+.postItem {
+  max-width: 750px;
+}
+.contentWrapper {
+  min-width: 80%;
+}
+textarea {
+  min-height: 40vh;
+}
+</style>
