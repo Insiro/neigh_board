@@ -56,7 +56,7 @@
         <template #content>
           <DropDownItem>
             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-            DropDown
+            User Info
           </DropDownItem>
           <DropDownItem @click="signOut()">
             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />

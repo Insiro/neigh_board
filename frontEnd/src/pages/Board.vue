@@ -22,7 +22,7 @@
 </template>
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
-import Card from "../components/Card.vue";
+import Card from "../components/card/Card.vue";
 import Table from "../components/Table.vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
