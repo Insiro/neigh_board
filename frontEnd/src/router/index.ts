@@ -5,7 +5,7 @@ import Register from "@/pages/auth/Register.vue";
 import Board from "@/pages/Board.vue";
 import NewPost from "@/pages/NewPost.vue";
 import Post from "@/pages/Post.vue";
-
+import User from "@/pages/User.vue";
 const authRoutes: Array<RouteRecordRaw> = [
   { path: "/", component: Main },
   {
@@ -29,6 +29,10 @@ const authRoutes: Array<RouteRecordRaw> = [
   {
     path: "/post/:id",
     component: Post,
+  },
+  {
+    path: "/user",
+    component: User,
   },
 ];
 
