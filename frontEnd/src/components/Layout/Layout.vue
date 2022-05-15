@@ -3,9 +3,9 @@
     <div id="wrapper">
       <SideBar />
       <div id="content-wrapper" class="d-flex flex-column">
-        <div id="content">
+        <div id="content-fluid" class="d-flex flex-column flex-grow-1">
           <NavBar />
-          <div class="container-fluid">
+          <div class="container-fluid flex-grow-1">
             <slot />
           </div>
         </div>
