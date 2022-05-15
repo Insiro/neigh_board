@@ -58,7 +58,7 @@
             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
             DropDown
           </DropDownItem>
-          <DropDownItem>
+          <DropDownItem @click="signOut()">
             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
             Logout
           </DropDownItem>
@@ -69,6 +69,7 @@
 </template>
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
+import globalState from "@/store/globalState";
 import Divider from "./Divider.vue";
 import Search from "./Search.vue";
 import DropDown, {
@@ -76,6 +77,7 @@ import DropDown, {
   DropDownContent,
   DropDownHeader,
 } from "./dropDown";
+import { useRouter } from "vue-router";
 
 @Options({
   components: {
@@ -87,7 +89,13 @@ import DropDown, {
     DropDownHeader,
   },
 })
-export default class NavBar extends Vue {}
+export default class NavBar extends Vue {
+  router = useRouter();
+  signOut() {
+    globalState.setUser("", "");
+    this.router.push("/auth");
+  }
+}
 </script>
 <style scoped>
 .searchItem {
