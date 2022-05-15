@@ -24,7 +24,14 @@
     </Item>
 
     <Divider>Divider</Divider>
-
+    <Item to="/post">
+      <i class="fas fa-fw fa-notebook"></i>
+      <span>게시판</span>
+    </Item>
+    <Item to="/newPost">
+      <i class="fas fa-fw fa-pen"></i>
+      <span>새글 쓰기</span>
+    </Item>
     <Fold>
       <template #default>
         <i class="fas fa-fw fa-cog"></i>
