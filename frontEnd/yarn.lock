@@ -1449,6 +1449,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"asynckit@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "asynckit@npm:0.4.0"
+  checksum: 7b78c451df768adba04e2d02e63e2d0bf3b07adcd6e42b4cf665cb7ce899bedd344c69a1dcbce355b5f972d597b25aaa1c1742b52cffd9caccb22f348114f6be
+  languageName: node
+  linkType: hard
+
 "atob@npm:^2.1.2":
   version: 2.1.2
   resolution: "atob@npm:2.1.2"
@@ -1458,12 +1465,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:^0.22.0":
-  version: 0.22.0
-  resolution: "axios@npm:0.22.0"
+"axios@npm:^0.27.2":
+  version: 0.27.2
+  resolution: "axios@npm:0.27.2"
   dependencies:
-    follow-redirects: ^1.14.4
-  checksum: 83dc4d02e180f69aa9f0d1d0d50b84ec3603517230d58b4c3720ebd440c7e64ea86c5e892dc6e19061608e8e1103504a709d8baa4051c4b7652101b523d04b63
+    follow-redirects: ^1.14.9
+    form-data: ^4.0.0
+  checksum: 38cb7540465fe8c4102850c4368053c21683af85c5fdf0ea619f9628abbcb59415d1e22ebc8a6390d2bbc9b58a9806c874f139767389c862ec9b772235f06854
   languageName: node
   linkType: hard
 
@@ -1944,6 +1952,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"combined-stream@npm:^1.0.8":
+  version: 1.0.8
+  resolution: "combined-stream@npm:1.0.8"
+  dependencies:
+    delayed-stream: ~1.0.0
+  checksum: 49fa4aeb4916567e33ea81d088f6584749fc90c7abec76fd516bf1c5aa5c79f3584b5ba3de6b86d26ddd64bae5329c4c7479343250cfe71c75bb366eae53bb7c
+  languageName: node
+  linkType: hard
+
 "commander@npm:^2.19.0":
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
@@ -2093,6 +2110,13 @@ __metadata:
   version: 4.2.2
   resolution: "deepmerge@npm:4.2.2"
   checksum: a8c43a1ed8d6d1ed2b5bf569fa4c8eb9f0924034baf75d5d406e47e157a451075c4db353efea7b6bcc56ec48116a8ce72fccf867b6e078e7c561904b5897530b
+  languageName: node
+  linkType: hard
+
+"delayed-stream@npm:~1.0.0":
+  version: 1.0.0
+  resolution: "delayed-stream@npm:1.0.0"
+  checksum: 46fe6e83e2cb1d85ba50bd52803c68be9bd953282fa7096f51fc29edd5d67ff84ff753c51966061e5ba7cb5e47ef6d36a91924eddb7f3f3483b1c560f77a0020
   languageName: node
   linkType: hard
 
@@ -2828,13 +2852,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.14.4":
+"follow-redirects@npm:^1.14.9":
   version: 1.15.0
   resolution: "follow-redirects@npm:1.15.0"
   peerDependenciesMeta:
     debug:
       optional: true
   checksum: eaec81c3e0ae57aae2422e38ad3539d0e7279b3a63f9681eeea319bb683dea67502c4e097136b8ce9721542b4e236e092b6b49e34e326cdd7733c274f0a3f378
+  languageName: node
+  linkType: hard
+
+"form-data@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "form-data@npm:4.0.0"
+  dependencies:
+    asynckit: ^0.4.0
+    combined-stream: ^1.0.8
+    mime-types: ^2.1.12
+  checksum: 01135bf8675f9d5c61ff18e2e2932f719ca4de964e3be90ef4c36aacfc7b9cb2fceb5eca0b7e0190e3383fe51c5b37f4cb80b62ca06a99aaabfcfd6ac7c9328c
   languageName: node
   linkType: hard
 
@@ -4088,6 +4123,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mime-db@npm:1.52.0":
+  version: 1.52.0
+  resolution: "mime-db@npm:1.52.0"
+  checksum: 0d99a03585f8b39d68182803b12ac601d9c01abfa28ec56204fa330bc9f3d1c5e14beb049bafadb3dbdf646dfb94b87e24d4ec7b31b7279ef906a8ea9b6a513f
+  languageName: node
+  linkType: hard
+
+"mime-types@npm:^2.1.12":
+  version: 2.1.35
+  resolution: "mime-types@npm:2.1.35"
+  dependencies:
+    mime-db: 1.52.0
+  checksum: 89a5b7f1def9f3af5dad6496c5ed50191ae4331cc5389d7c521c8ad28d5fdad2d06fd81baf38fed813dc4e46bb55c8145bb0ff406330818c9cf712fb2e9b3836
+  languageName: node
+  linkType: hard
+
 "mimic-fn@npm:^2.1.0":
   version: 2.1.0
   resolution: "mimic-fn@npm:2.1.0"
@@ -4247,7 +4298,7 @@ __metadata:
     "@vitejs/plugin-vue": ^2.3.1
     "@vue/eslint-config-prettier": ^7.0.0
     "@vue/eslint-config-typescript": ^10.0.0
-    axios: ^0.22.0
+    axios: ^0.27.2
     bootstrap: ^5.1.3
     bootstrap-vue-3: ^0.1.11
     dotenv: ^16.0.0
@@ -4270,7 +4321,7 @@ __metadata:
     vue-router: ^4.0.14
     vue-tsc: ^0.34.7
     vuex: ^4.0.2
-    vuex-module-decorator: ^1.2.0
+    vuex-module-decorators: ^2.0.0
   languageName: unknown
   linkType: soft
 
@@ -4711,13 +4762,6 @@ __metadata:
     string_decoder: ^1.1.1
     util-deprecate: ^1.0.1
   checksum: d4ea81502d3799439bb955a3a5d1d808592cf3133350ed352aeaa499647858b27b1c4013984900238b0873ec8d0d8defce72469fb7a83e61d53f5ad61cb80dc8
-  languageName: node
-  linkType: hard
-
-"reflect-metadata@npm:^0.1.10":
-  version: 0.1.13
-  resolution: "reflect-metadata@npm:0.1.13"
-  checksum: 798d379a7b6f6455501145419505c97dd11cbc23857a386add2b9ef15963ccf15a48d9d15507afe01d4cd74116df8a213247200bac00320bd7c11ddeaa5e8fb4
   languageName: node
   linkType: hard
 
@@ -5468,13 +5512,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-class-component@npm:^6.0.0, vue-class-component@npm:^6.1.0":
-  version: 6.3.2
-  resolution: "vue-class-component@npm:6.3.2"
-  checksum: d92b011b8968c64fdad70c515c509a29f2080512052147520f82fc78feaedf700f4abbe742badd2a510df8bc0bdf0dfb973ede507394f99cea0a8723e92a9228
-  languageName: node
-  linkType: hard
-
 "vue-class-component@npm:^8.0.0-rc.1":
   version: 8.0.0-rc.1
   resolution: "vue-class-component@npm:8.0.0-rc.1"
@@ -5524,16 +5561,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-property-decorator@npm:^6.0.0":
-  version: 6.1.0
-  resolution: "vue-property-decorator@npm:6.1.0"
-  dependencies:
-    reflect-metadata: ^0.1.10
-    vue-class-component: ^6.1.0
-  checksum: ed61d2e9414349f9678ea48fa6a1b9f83fb46852c79cb1b76e1e973719d002f75230873c3d086296c40de2680c92c5efae73739dca076f38affce411c869d474
-  languageName: node
-  linkType: hard
-
 "vue-router@npm:^4.0.14":
   version: 4.0.14
   resolution: "vue-router@npm:4.0.14"
@@ -5565,13 +5592,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue@npm:^2.5.16":
-  version: 2.6.14
-  resolution: "vue@npm:2.6.14"
-  checksum: 23524a1bdca094d62cb3491a46317eed75184b5d61d28fa846ea5d2b241c1cc7084fc67ee259d47a50a6d0bbc33ecaceb7bb52bff81312fe7da07263f3419942
-  languageName: node
-  linkType: hard
-
 "vue@npm:^3.2.25":
   version: 3.2.33
   resolution: "vue@npm:3.2.33"
@@ -5585,24 +5605,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vuex-module-decorator@npm:^1.2.0":
-  version: 0.1.1
-  resolution: "vuex-module-decorator@npm:0.1.1"
-  dependencies:
-    vue: ^2.5.16
-    vue-class-component: ^6.0.0
-    vue-property-decorator: ^6.0.0
-    vuex: ^3.0.1
-  checksum: c7a4b3bd4bec7de0f09f65cd94e9227068146ca445cee6e2fee88ce2625d8cc028808c9b1fdc7e4358289caeec47f76aeb8bb6c53305013ffabe0c63622dbb32
-  languageName: node
-  linkType: hard
-
-"vuex@npm:^3.0.1":
-  version: 3.6.2
-  resolution: "vuex@npm:3.6.2"
+"vuex-module-decorators@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "vuex-module-decorators@npm:2.0.0"
   peerDependencies:
-    vue: ^2.0.0
-  checksum: 37915741ba9557024ea42579e2c8d81847ec699d07d8ea3aa673929f26fceba8c59e7e1e6a875fd3962e50018bc30f782f5ace34d83307ef228ad46a4df343da
+    vue: ">=3"
+    vuex: ">=4"
+  checksum: 09298e916feafed0a5df3048d2d710dd3133cd9c5f4d6a326b69efdff387e3efa75f8c5971ee25c8c1d40e37cbad19ea56cb830c2bc6e0469eb70f803052bf8c
   languageName: node
   linkType: hard
 
