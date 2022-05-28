@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --port 17010",
+    "serve": "serve -s build -l 17010"
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -15,6 +16,7 @@
     "marked": "^4.0.15",
     "normalize.css": "^8.0.1",
     "path": "^0.12.7",
+    "serve": "^13.0.2",
     "vue": "^3.2.25",
     "vue-class-component": "^8.0.0-rc.1",
     "vue-router": "^4.0.14",
