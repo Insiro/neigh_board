@@ -62,5 +62,11 @@ class AuthController(View):
 class Register(View):
     def post(self, request, *args, **kwargs):
         new_user = {
-            'user_id' : request.session
+            'user_id' : request.session,
+            'user_name' : request.session,
+            'register' : request.session,
+            'phone' : request.session,
+            'region' : request.session,
+            'certification' : request.session
         }
+        return JsonResponse({"register" : new_user}, json_dumps_params={"ensure_ascii": False}) 
