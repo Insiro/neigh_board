@@ -31,9 +31,12 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    comment_id = models.UUIDField(
-        primary_key=True, default=uuid4, editable=False)
+    comment_id = models.UUIDField( primary_key=True, default=uuid4, editable=False)
     post = models.ForeignKey(Post, null=False, on_delete=models.CASCADE)
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     comment = models.TextField()
     date = models.DateField(default=datetime.now)
+
+    class Meta : #기본적으로 필드의 결과를 내림차순으로 정렬하도록
+        ordering =['date']
+
