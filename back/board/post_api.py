@@ -1,40 +1,62 @@
-from django.shortcuts import get_object_or_404
-from audioop import reverse
-from django.shortcuts import redirect, render
-from django.views import View
-from django.http import Http404, JsonResponse
-from django.forms.models import model_to_dict
 
-from neigh_board.back.board.models import User, Comment, Post, Region
+from datetime import datetime
+from django.views import View
+from django.http import Http404, HttpResponseBadRequest, JsonResponse
+from django.forms.models import model_to_dict
+from board.models import Post, Comment
+
 
 class PostController(View):
     def post(self, request, *args, **kwargs):
+        post = self.request.POST
+        author = self.request.session["id"]
+        Post(
+            author=author,
+            region=request.session['region'],
+            title=post.get("title"),
+            content=post.get("content"),
+            likes=0,
+            date=datetime.today()
+        ).save()
+        return JsonResponse({"result": "success"}, json_dumps_params={"ensure_ascii": False})
+
+    def get(self, request, *args, **kwargs):
+        if "region" in self.request.session:
+            all_board = model_to_dict(Post.objects.filter(
+                region=self.request.session["region"]))
+        else:
+            all_board = model_to_dict(Post.objects.all())  # 게시판 전체 다 보여주기
+        return JsonResponse({"board": all_board}, json_dumps_params={"ensure_ascii": False})
+
+
+class PostItemController(View):
+    def delete(self, request, *args, **kwargs):
         pass
 
     def get(self, request, *args, **kwargs):
         pass
 
 
-# request.session == 현재 서비스를 이용하고 있는 사람의 정보
 class CommentController(View):
-    def post(self, request, *args, **kwargs): 
-        #댓글 객체를 만들어주는 역할
-        errors=[]
-        if "comment_id" in request:
-            comment_id = request["comment_id"]
-            comment = model_to_dict(Comment.objects.get(comment_id=comment_id))
+    def post(self, request, args, **kwargs):
+        # 댓글 객체를 만들어주는 역할
+        post = self.request.POST
+        if not("id" in kwargs and "comment" in post and "author" in post):
+            return HttpResponseBadRequest()
+
+        comment = Comment(post=kwargs["id"], comment=post.get("comment"),
+                          author=post.get("author"), date=datetime.now())
+        comment.save()
+
         return JsonResponse({"new_comment": comment}, json_dumps_params={"ensure_ascii": False})
-        
 
-    def get(self, request, *args, **kwargs): # 댓글을 보여주는 코드, 해당 게시물의 post_id만 갖는 댓글만 필터링하여 저장하고 
+    def get(self, request, args, **kwargs):  # 댓글을 보여주는 코드, 해당 게시물의 post_id만 갖는 댓글만 필터링하여 저장하고
         #comment.post == board.board_id
-        if kwargs.get('board_id') is None:
-            comment_queryset = Comment.objects.all() #모든 comment의 정보를 불러온다.
-            return JsonResponse({"board": comment_queryset}, json_dumps_params={"ensure_ascii": False})
-        else:
-            board_id = kwargs.get('board_id')
-            comment_queryset = Comment.objects.all(Comment.objects.get(post=board_id)) #id에 해당하는 User의 정보를 불러온다
-            return JsonResponse({"board": comment_queryset}, json_dumps_params={"ensure_ascii": False})
-        
+        comm_id = kwargs.get('id')
+        if comm_id is None:
+            comments = Comment.objects.filter(comment_id=comm_id)
 
+            return JsonResponse({"board": model_to_dict(comments)}, json_dumps_params={"ensure_ascii": False})
+        else:
+            return Http404
 

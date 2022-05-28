@@ -16,7 +16,6 @@ class User(models.Model):
     register = models.DateField(default=datetime.now)
     phone = models.CharField(max_length=20)
     region = models.ForeignKey(Region, null=True, on_delete=models.SET_NULL)
-    salt = models.TextField()
 
 
 class Post(models.Model):
