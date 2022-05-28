@@ -12,10 +12,10 @@ def get_user_info(request, user_id):
             user_obj = User.objects.get(user_id=user_id)
             user = {
                 "register": user_obj.register,
-                "region": user_obj.region,
+                "region": user_obj.region.name,
                 "user_name": user_obj.user_name
             }
-        return JsonResponse({"user": user}, json_dumps_params={"ensure_ascii": False})
+        return JsonResponse({"user":  user}, json_dumps_params={"ensure_ascii": False})
     return Http404()
 
 # 사용자 유저
