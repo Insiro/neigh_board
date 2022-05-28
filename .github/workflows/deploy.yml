@@ -1,0 +1,36 @@
+name: Deploy_and build
+    
+on:
+    push:
+        branches: [ master ]
+    workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy then build
+    runs-on: [ubuntu-latest]
+    
+    strategy:
+      matrix:
+        node-version: [14.x]
+    
+    steps:
+      - name: SSH Remote Commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_IP }}
+          username: ${{ secrets.REMOTE_SSH_ID }}
+          password: ${{ secrets.PASSWORD }}
+          port: 22
+          script: |
+            cd neigh_board
+            git pull
+            pipenv install
+            cd frontEnd
+            yarn install & yarn build
+            cd ../BE/backEndServer
+            yarn install
+            screen -S neighboard_back  -X quite
+            screen -S neighboard_front -X quit
+            screen -dmS neighboard_back bash -c 'cd /home/ubuntu/neigh_board; pipenv run python ./back/manage.py runserver 0.0.0.0:17011'
+            screen -dmS neighboard_front bash -c 'cd /home/ubuntu/neigh_board/frontEend; yarn preview;
