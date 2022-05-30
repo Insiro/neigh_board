@@ -37,7 +37,21 @@ manage Comment
 > ```
 > http://{{host}}/post/{{postId}}/comment
 > ```
+### Body (**raw**)
 
+```json
+{
+    "comments": [
+        {
+            "post": "dbc227d4-192c-40f6-b100-6f5cbcd918e9",
+            "author": "test",
+            "comment": "test",
+            "date": "2022-05-30",
+            "id": "847ff9bd-d159-440b-a2fc-e0ceb5e4c667"
+        }
+    ]
+}
+```
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
 ## End-point: GetComment
@@ -48,6 +62,18 @@ manage Comment
 > http://{{host}}/comment/{{CommentId}}
 > ```
 
+### Body (**raw**)
+
+```json
+{
+    "comment": {
+        "post": "dbc227d4-192c-40f6-b100-6f5cbcd918e9",
+        "author": "test",
+        "comment": "test1",
+        "date": "2022-05-30"
+    }
+}
+```
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
 
 ---
