@@ -45,7 +45,7 @@ manage Comment
 ### Method: GET
 
 > ```
-> http://{{host}}/comment/f2004004-eabf-4f8e-b4fc-fb242bd6d2d5
+> http://{{host}}/comment/{{CommentId}}
 > ```
 
 ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃ ⁃
