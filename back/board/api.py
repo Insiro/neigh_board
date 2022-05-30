@@ -1,7 +1,9 @@
+from http.client import UNPROCESSABLE_ENTITY
 from django.views import View
-from django.http import Http404, HttpResponseBadRequest, HttpResponseNotAllowed, JsonResponse
+from django.http import Http404,  JsonResponse
 from django.forms.models import model_to_dict
-from board.models import User, Post, Region
+from board.httpResponse import HttpError
+from board.models import User, Region
 from django.contrib.auth.hashers import make_password, check_password
 from datetime import datetime
 
@@ -16,7 +18,7 @@ def get_user_info(request, user_id):
                 "user_name": user_obj.user_name
             }
         return JsonResponse({"user":  user}, json_dumps_params={"ensure_ascii": False})
-    return Http404()
+    return HttpError("NotFound", 404).send()
 
 # 사용자 유저
 
@@ -40,7 +42,7 @@ class AuthController(View):
     def post(self, request, *args, **kwargs):
         post = self.request.POST
         if not("id" in post and "pwd" in post):
-            return HttpResponseBadRequest()
+            return HttpError("UNPROCESSABLE_ENTITY", UNPROCESSABLE_ENTITY)
         user = User.objects.get(user_id=post.get("id"))
 
         if check_password(post.get("pwd"), user.certification):
@@ -60,10 +62,10 @@ class AuthController(View):
 def Register(request):
     post = request.POST
     if not("id" in post, "user_name" in post, "phone" in post, "region" in post, "pwd" in post):
-        return HttpResponseNotAllowed
+        return HttpError("UNPROCESSABLE_ENTITY", UNPROCESSABLE_ENTITY)
     user = User.objects.filter(user_id=post.get('id'))
     if(user.__len__() != 0):
-        return HttpResponseNotAllowed
+        return HttpError("CONFLICT", 409)
     region, _ = Region.objects.get_or_create(name=post.get("region"))
     pwd = make_password(post.get("pwd"))
     user = User(
