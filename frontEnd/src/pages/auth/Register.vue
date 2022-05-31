@@ -4,7 +4,14 @@
       <div class="text-center">
         <h1 class="h4 text-gray-900 mb-4">Register</h1>
       </div>
-      <form class="user">
+      <form class="user" @submit.prevent="regist">
+        <UserInput
+          class="form-group"
+          type="text"
+          placeholder="Enter name..."
+          :value="name"
+          @updates="nameChanged"
+        />
         <UserInput
           class="form-group"
           type="text"
@@ -19,6 +26,11 @@
           :value="pass_str"
           @updates="pass_strChanged"
         />
+        <div id="correctPwd">
+          <span v-if="pass_strChk != '' && pass_str !== pass_strChk">
+            비밀번호가 일치하지 않습니다
+          </span>
+        </div>
         <UserInput
           class="form-group"
           type="password"
@@ -41,9 +53,7 @@
           @updates="regionChanged"
         />
         <hr />
-        <button class="btn btn-primary btn-user btn-block" @click="regist()">
-          Regist
-        </button>
+        <button class="btn btn-primary btn-user btn-block">Regist</button>
       </form>
     </div>
   </div>
@@ -51,15 +61,46 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import UserInput from "@/components/input/UserInput.vue";
+import axios, { AxiosError } from "axios";
+import { useRouter } from "vue-router";
 @Options({ components: { UserInput } })
 export default class Component extends Vue {
   id_str = "";
   pass_str = "";
   pass_strChk = "";
+  name = "";
   call = "";
   region = "";
-  regist() {
-    //TODO: send Request for regist
+  async regist() {
+    if (this.pass_str !== this.pass_strChk) return;
+    if (
+      (this.id_str.length &&
+        this.pass_str.length &&
+        this.call.length &&
+        this.region.length &&
+        this.name.length) === 0
+    )
+      return;
+    let data = new FormData();
+    data.append("id", this.id_str);
+    data.append("pwd", this.pass_str);
+    data.append("phone", this.call);
+    data.append("region", this.region);
+    data.append("user_name", this.name);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    try {
+      await axios.post("/api/register", data);
+      alert("회원가입에 성공하였습니다");
+      useRouter().push("/auth");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 409) {
+          alert("이미 사용중인 아이디 입니다");
+          return;
+        }
+      }
+      alert("회원가입에 실패하였습니다");
+    }
   }
   idChanged(data: string) {
     this.id_str = data;
@@ -76,6 +117,9 @@ export default class Component extends Vue {
   regionChanged(data: string) {
     this.region = data;
   }
+  nameChanged(data: string) {
+    this.name = data;
+  }
 }
 </script>
 <style scoped>
@@ -83,5 +127,11 @@ export default class Component extends Vue {
   margin-top: 2rem;
   border-radius: 10px;
   background-color: whitesmoke;
+}
+#correctPwd {
+  height: 2rem;
+  width: 100%;
+  text-align: center;
+  color: red;
 }
 </style>
