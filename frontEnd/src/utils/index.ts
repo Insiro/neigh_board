@@ -1,4 +1,4 @@
-import marked, { MarkedOptions } from "marked";
+import { MarkedOptions, marked } from "marked";
 
 export const markedOption: MarkedOptions = {
   renderer: new marked.Renderer(),
