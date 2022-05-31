@@ -27,6 +27,10 @@
       <i class="fas fa-fw fa-pen"></i>
       <span>새글 쓰기</span>
     </Item>
+    <Item to="/license">
+      <i class="fas fa-fw fa-pen"></i>
+      <span>오픈소스 라이센스</span>
+    </Item>
     <div style="flex-grow: 1"></div>
     <Item>
       <button class="toggle_btn" @click="sidebarToggle()" />

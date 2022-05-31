@@ -17,6 +17,7 @@
 </template>
 <script lang="ts">
 import axios, { AxiosError } from "axios";
+import { marked } from "marked";
 import { Options, Vue } from "vue-class-component";
 import { useRouter, useRoute } from "vue-router";
 import { Post, Comment } from "@/store/entity";
@@ -45,20 +46,16 @@ export default class Component extends Vue {
       let result = await axios.get(apiUrl + "/post/" + id);
       this.m_post = result.data.post as Post;
       this.m_post.id = id;
-      console.log(this.m_post);
       if (id === "") return;
       let comm_result = await axios.get(apiUrl + "/post/" + id + "/comment");
       this.comments = comm_result.data.comments as Comment[];
-      console.log(comm_result.data);
-    } catch (error) {
-      console.log(error as AxiosError);
-    }
+    } catch (error) {}
   }
   activated() {
     if (this.m_post.id === "") useRouter().push("/404");
   }
   get postText(): string {
-    return this.m_post.content ?? "";
+    return marked(this.m_post.content ?? "");
   }
 }
 </script>

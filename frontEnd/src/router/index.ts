@@ -13,6 +13,7 @@ import Post from "@/pages/Post.vue";
 import User from "@/pages/User.vue";
 import NotFound from "@/pages/NotFound.vue";
 import authState from "@/store/auth/state";
+import License from "@/pages/License.vue";
 const authRoutes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -55,6 +56,10 @@ const authRoutes: Array<RouteRecordRaw> = [
     meta: {
       auth_require: true,
     },
+  },
+  {
+    path: "/license",
+    component: License,
   },
   { path: "/404", component: NotFound },
 ];

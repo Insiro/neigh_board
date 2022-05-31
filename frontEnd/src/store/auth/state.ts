@@ -62,7 +62,6 @@ export class AuthState extends VuexModule implements AuthInterface {
     return this.data.bSigned;
   }
   get user(): User {
-    console.log(this.data);
     return {
       id: this.data.id,
       name: this.data.name,

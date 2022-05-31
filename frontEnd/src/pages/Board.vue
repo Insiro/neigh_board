@@ -43,7 +43,6 @@ export default class Board extends Vue {
       posts.forEach((post) => {
         this.pages.push(post);
       });
-      console.log(response.data);
     } catch (error) {}
   }
   moveSub(id: string) {

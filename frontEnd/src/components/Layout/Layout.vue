@@ -5,7 +5,7 @@
       <div id="content-wrapper" class="d-flex flex-column">
         <div id="content-fluid" class="d-flex flex-column flex-grow-1">
           <NavBar />
-          <div class="container-fluid flex-grow-1">
+          <div class="container-fluid flex-grow-1" id="contentWrapper">
             <slot />
           </div>
         </div>
@@ -23,3 +23,11 @@ import NavBar from "./navbar/NavBar.vue";
 @Options({ components: { SideBar, Footer, NavBar } })
 export default class Layout extends Vue {}
 </script>
+<style scoped>
+#contentWrapper {
+  overflow: scroll;
+}
+#wrapper {
+  max-height: 100vh;
+}
+</style>
