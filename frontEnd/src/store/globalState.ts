@@ -26,10 +26,6 @@ export class GlobalModule extends VuexModule implements GlobalInterface {
   set pageName(data: string) {
     this.PageName = data;
   }
-  @Mutation setUser(userId: string, userName: string): void {
-    this.UserId = userId;
-    this.UserName = userName;
-  }
 }
 export const globalState = getModule(GlobalModule);
 export interface GlobalInterface {

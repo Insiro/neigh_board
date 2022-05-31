@@ -48,9 +48,9 @@
       <!-- Nav Item - User Information -->
       <DropDown>
         <template #default>
-          <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-            >User Name</span
-          >
+          <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+            {{ user.name }}
+          </span>
           <img class="img-profile rounded-circle" src="/user.svg" />
         </template>
         <template #content>
@@ -69,7 +69,6 @@
 </template>
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
-import globalState from "@/store/globalState";
 import Divider from "./Divider.vue";
 import Search from "./Search.vue";
 import DropDown, {
@@ -78,6 +77,8 @@ import DropDown, {
   DropDownHeader,
 } from "./dropDown";
 import { useRouter } from "vue-router";
+import { User } from "@/store/entity";
+import authState from "@/store/auth/state";
 
 @Options({
   components: {
@@ -92,8 +93,11 @@ import { useRouter } from "vue-router";
 export default class NavBar extends Vue {
   router = useRouter();
   signOut() {
-    globalState.setUser("", "");
+    authState.signOut();
     this.router.push("/auth");
+  }
+  get user(): User {
+    return authState.user;
   }
 }
 </script>

@@ -1,8 +1,9 @@
 import { Store } from "vuex";
 import { GlobalInterface } from "./globalState";
-
+import { AuthData, AuthInterface } from "./auth/interface";
 interface RootState {
   global: GlobalInterface;
+  auth: AuthInterface;
 }
 
 const store = new Store<RootState>({
@@ -13,6 +14,7 @@ const store = new Store<RootState>({
       UserId: "",
       UserName: "",
     },
+    auth: { data: new AuthData() },
   },
 });
 export default store;

@@ -1,4 +1,4 @@
-from http.client import UNPROCESSABLE_ENTITY
+from http.client import UNAUTHORIZED, UNPROCESSABLE_ENTITY
 from django.views import View
 from django.http import Http404,  JsonResponse
 from django.forms.models import model_to_dict
@@ -36,20 +36,32 @@ class UserController(View):
 # 로그인 하면 나오는 개인정보 창
 class AuthController(View):
     def get(self, request, *args, **kwargs):
-        isSIgned = 'id' in self.request.session
-        return JsonResponse({"isSigned": isSIgned}, json_dumps_params={"ensure_ascii": False})
+        isSIgned = False
+        obj = None
+        if "id" in self.request.session:
+            isSIgned = True
+            obj = {
+                "id": request.session["id"],
+                "name": request.session["name"],
+            }
+        return JsonResponse({"isSigned": isSIgned, "user": obj}, json_dumps_params={"ensure_ascii": False})
 
     def post(self, request, *args, **kwargs):
         post = self.request.POST
         if not("id" in post and "pwd" in post):
-            return HttpError("UNPROCESSABLE_ENTITY", UNPROCESSABLE_ENTITY)
+            return HttpError("UNPROCESSABLE_ENTITY", UNPROCESSABLE_ENTITY).send()
         user = User.objects.get(user_id=post.get("id"))
 
         if check_password(post.get("pwd"), user.certification):
             self.request.session["id"] = user.user_id
             self.request.session["region"] = user.region.name
-            return JsonResponse({"isSigned": True})
-        return Http404()
+            self.request.session["name"] = user.user_name
+            obj = {
+                "id": user.user_id,
+                "name": user.user_name,
+            }
+            return JsonResponse({"isSigned": True, "user": obj})
+        return HttpError("UNAUTHORIZED", UNAUTHORIZED).send()
 
     # Sign out
     def delete(self, request, *args, **kwargs):
@@ -65,7 +77,7 @@ def Register(request):
         return HttpError("UNPROCESSABLE_ENTITY", UNPROCESSABLE_ENTITY)
     user = User.objects.filter(user_id=post.get('id'))
     if(user.__len__() != 0):
-        return HttpError("CONFLICT", 409)
+        return HttpError("CONFLICT", 409).send()
     region, _ = Region.objects.get_or_create(name=post.get("region"))
     pwd = make_password(post.get("pwd"))
     user = User(

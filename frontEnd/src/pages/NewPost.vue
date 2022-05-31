@@ -18,7 +18,7 @@
           placeholder="게시글을 입력하세요"
         />
       </div>
-      <Button class="mt-5 postItem" @click="submitPost"> 게시 </Button>
+      <button class="mt-5 postItem" @click="submitPost">게시</button>
     </div>
     <div class="flex-grow-1" />
   </div>
@@ -26,6 +26,8 @@
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
 import UserInput from "@/components/input/UserInput.vue";
+import axios from "axios";
+import { apiUrl } from "@/utils";
 @Options({ components: { UserInput } })
 export default class NewPost extends Vue {
   title = "";
@@ -33,8 +35,19 @@ export default class NewPost extends Vue {
   onTitleChanged(title: string) {
     this.title = title;
   }
-  submitPost() {
-    //TODO
+  async submitPost() {
+    if (this.title === this.content && this.content === "") return;
+    let data = {
+      title: this.title,
+      conent: this.content,
+    };
+    try {
+      await axios.post(apiUrl + "/post", data);
+      this.title = "";
+      this.content = "";
+      alert("계시글 등록이 완료되었습니다");
+    } catch (error) {}
+    alert("계시글 등록에 실패하였습니다");
   }
 }
 </script>

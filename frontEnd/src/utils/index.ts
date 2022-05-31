@@ -1,4 +1,4 @@
-import marked, { MarkedOptions } from "marked";
+import { MarkedOptions, marked } from "marked";
 
 export const markedOption: MarkedOptions = {
   renderer: new marked.Renderer(),
@@ -10,3 +10,6 @@ export const markedOption: MarkedOptions = {
   smartLists: true,
   smartypants: false,
 };
+
+export const primaryColor = "#416389";
+export const apiUrl = "http://localhost:8000/api";
