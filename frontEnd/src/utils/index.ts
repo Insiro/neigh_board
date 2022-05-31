@@ -12,4 +12,4 @@ export const markedOption: MarkedOptions = {
 };
 
 export const primaryColor = "#416389";
-export const apiUrl = "http://neighboard.insiro.me/api";
+export const apiUrl = "https://neighboard.insiro.me/api";
