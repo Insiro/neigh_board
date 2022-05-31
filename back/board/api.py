@@ -50,18 +50,20 @@ class AuthController(View):
         post = self.request.POST
         if not("id" in post and "pwd" in post):
             return HttpError("UNPROCESSABLE_ENTITY", UNPROCESSABLE_ENTITY).send()
-        user = User.objects.get(user_id=post.get("id"))
-
-        if check_password(post.get("pwd"), user.certification):
-            self.request.session["id"] = user.user_id
-            self.request.session["region"] = user.region.name
-            self.request.session["name"] = user.user_name
-            obj = {
-                "id": user.user_id,
-                "name": user.user_name,
-            }
-            return JsonResponse({"isSigned": True, "user": obj})
-        return HttpError("UNAUTHORIZED", UNAUTHORIZED).send()
+        try:
+            user = User.objects.get(user_id=post.get("id"))
+            if check_password(post.get("pwd"), user.certification):
+                self.request.session["id"] = user.user_id
+                self.request.session["region"] = user.region.name
+                self.request.session["name"] = user.user_name
+                obj = {
+                    "id": user.user_id,
+                    "name": user.user_name,
+                }
+                return JsonResponse({"isSigned": True, "user": obj})
+            return HttpError("UNAUTHORIZED", UNAUTHORIZED).send()
+        except:
+            return HttpError("UNAUTHORIZED", UNAUTHORIZED).send()
 
     # Sign out
     def delete(self, request, *args, **kwargs):
