@@ -18,7 +18,7 @@
           placeholder="게시글을 입력하세요"
         />
       </div>
-      <Button class="mt-5 postItem" @click="submitPost"> 게시 </Button>
+      <button class="mt-5 postItem" @click="submitPost">게시</button>
     </div>
     <div class="flex-grow-1" />
   </div>
