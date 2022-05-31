@@ -4,7 +4,7 @@
       <div class="text-center">
         <h1 class="h4 text-gray-900 mb-4">Neigh Board</h1>
       </div>
-      <form class="user">
+      <form class="user" @submit.prevent="signIn">
         <UserInput
           class="form-group"
           type="text"
@@ -30,7 +30,7 @@
             >Remember Me</label
           >
         </div>
-        <button class="btn btn-primary btn-user btn-block" @click="singIn()">
+        <button class="btn btn-primary btn-user btn-block" @click="signIn">
           Login
         </button>
       </form>
@@ -47,13 +47,26 @@
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
 import UserInput from "@/components/input/UserInput.vue";
+import { useRouter } from "vue-router";
+import authState from "@/store/auth/state";
+
 @Options({ components: { UserInput } })
 export default class Component extends Vue {
   remember: boolean = false;
+  router = useRouter();
   id = "";
   pwd = "";
-  singIn() {
-    //TODO
+  async signIn() {
+    try {
+      const result = await authState.signIn({
+        id: this.id,
+        password: this.pwd,
+      });
+      if (result) this.router.push("/");
+    } catch (error) {
+      console.log(error);
+    }
+    //TODO:
   }
   idChanged(data: string) {
     this.id = data;
