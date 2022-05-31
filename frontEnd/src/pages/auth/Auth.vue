@@ -33,9 +33,7 @@
             >Remember Me</label
           >
         </div>
-        <button class="btn btn-primary btn-user btn-block" @click="signIn">
-          Login
-        </button>
+        <button class="btn btn-primary btn-user btn-block">Login</button>
       </form>
       <hr />
       <!-- <div class="text-center">
@@ -67,6 +65,7 @@ export default class Component extends Vue {
         password: this.pwd,
       });
       if (result) this.router.push("/");
+      else alert("로그인에 실패하였습니다");
     } catch (error) {
       console.log(error);
     }
