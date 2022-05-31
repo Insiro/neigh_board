@@ -26,7 +26,10 @@
             type="checkbox"
             class="custom-control-input"
           />
-          <label class="custom-control-label" for="customCheck"
+          <label
+            class="custom-control-label"
+            for="customCheck"
+            @click="chkboxUpdate"
             >Remember Me</label
           >
         </div>
@@ -52,7 +55,8 @@ import authState from "@/store/auth/state";
 
 @Options({ components: { UserInput } })
 export default class Component extends Vue {
-  remember: boolean = false;
+  private m_remember: boolean = (localStorage.getItem("remember") ??
+    false) as boolean;
   router = useRouter();
   id = "";
   pwd = "";
@@ -68,11 +72,24 @@ export default class Component extends Vue {
     }
     //TODO:
   }
+
   idChanged(data: string) {
     this.id = data;
   }
   pwdChanged(data: string) {
     this.pwd = data;
+  }
+  get remember() {
+    return this.m_remember;
+  }
+  set remember(value) {
+    localStorage.setItem("remember", String(this.remember));
+    this.m_remember = value;
+  }
+  chkboxUpdate() {
+    let checked = !this.m_remember;
+    localStorage.setItem("remember", String(checked));
+    this.m_remember = checked;
   }
 }
 </script>
