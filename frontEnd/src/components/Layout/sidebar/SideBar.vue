@@ -1,7 +1,8 @@
 <template>
   <ul
     id="sidebar"
-    class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+    class="navbar-nav sidebar sidebar-dark accordion"
+    :style="{ backgroundColor: bgColor }"
     :class="[isToggled ? toggledCss : blank]"
   >
     <!-- Sidebar - Brand -->
@@ -16,14 +17,8 @@
     </router-link>
 
     <Divider />
-
-    <!-- Nav Item - Dashboard -->
-    <Item to="/">
-      <i class="fas fa-fw fa-tachometer-alt"></i>
-      <span>Item</span>
-    </Item>
-
-    <Divider>Divider</Divider>
+    <div style="height: 2rem"></div>
+    <Divider />
     <Item to="/post">
       <i class="fas fa-fw fa-notebook"></i>
       <span>게시판</span>
@@ -32,20 +27,11 @@
       <i class="fas fa-fw fa-pen"></i>
       <span>새글 쓰기</span>
     </Item>
-    <Fold>
-      <template #default>
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Fold Menu</span>
-      </template>
-      <template #content>
-        <FoldHeader>Fold Items:</FoldHeader>
-        <FoldItem>FoldItem</FoldItem>
-      </template>
-    </Fold>
-
-    <div class="text-center d-none d-md-inline">
+    <div style="flex-grow: 1"></div>
+    <Item>
       <button class="toggle_btn" @click="sidebarToggle()" />
-    </div>
+    </Item>
+    <div style="height: 20%"></div>
   </ul>
 </template>
 <script lang="ts">
@@ -54,8 +40,10 @@ import { ref } from "vue";
 import Divider from "./item/Divider.vue";
 import Item from "./item/Item.vue";
 import Fold, { FoldItem, FoldHeader } from "./item/fold";
+import { primaryColor } from "@/utils";
 @Options({ components: { Item, Divider, Fold, FoldItem, FoldHeader } })
 export default class Sidebar extends Vue {
+  bgColor = primaryColor;
   isToggled = false;
   sidebarToggle(): void {
     this.isToggled = !this.isToggled;
@@ -67,8 +55,11 @@ export default class Sidebar extends Vue {
 </script>
 <style scoped>
 .toggle_btn {
-  border-radius: 50% !important;
+  border-radius: 15px !important;
   border-width: 0px;
+  height: 1rem;
+  width: 100%;
+  display: flex;
 }
 @media screen and (max-width: 768px) {
   #sidebar.toggled {

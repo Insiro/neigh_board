@@ -10,3 +10,5 @@ export const markedOption: MarkedOptions = {
   smartLists: true,
   smartypants: false,
 };
+
+export const primaryColor = "#416389";

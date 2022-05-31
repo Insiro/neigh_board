@@ -11,6 +11,7 @@ import Board from "@/pages/Board.vue";
 import NewPost from "@/pages/NewPost.vue";
 import Post from "@/pages/Post.vue";
 import User from "@/pages/User.vue";
+import NotFound from "@/pages/NotFound.vue";
 import authState from "@/store/auth/state";
 const authRoutes: Array<RouteRecordRaw> = [
   {
@@ -55,6 +56,7 @@ const authRoutes: Array<RouteRecordRaw> = [
       auth_require: true,
     },
   },
+  { path: "/404", component: NotFound },
 ];
 
 const routes: Array<RouteRecordRaw> = [...authRoutes];
