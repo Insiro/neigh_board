@@ -77,7 +77,7 @@ def Register(request):
         return HttpError("UNPROCESSABLE_ENTITY", UNPROCESSABLE_ENTITY)
     user = User.objects.filter(user_id=post.get('id'))
     if(user.__len__() != 0):
-        return HttpError("CONFLICT", 409)
+        return HttpError("CONFLICT", 409).send()
     region, _ = Region.objects.get_or_create(name=post.get("region"))
     pwd = make_password(post.get("pwd"))
     user = User(
