@@ -8,6 +8,7 @@ import {
 import axios from "axios";
 import store from "..";
 import { AuthData, AuthInterface } from "./interface";
+import { apiUrl } from "@/utils";
 import { User } from "../entity";
 @Module({ namespaced: true, store, name: "authModule", dynamic: true })
 export class AuthState extends VuexModule implements AuthInterface {
@@ -30,7 +31,7 @@ export class AuthState extends VuexModule implements AuthInterface {
       const form = new FormData();
       form.append("id", info.id);
       form.append("pwd", info.password);
-      const result = await axios.post("api/auth", form);
+      const result = await axios.post(apiUrl + "/auth", form);
       const data = result.data.user;
       this.setUserName(data.name);
       this.setID(data.id);
@@ -44,10 +45,10 @@ export class AuthState extends VuexModule implements AuthInterface {
   }
   @Action async signOut() {
     this.setSign(false);
-    axios.delete("api/auth");
+    axios.delete(apiUrl + "/auth");
   }
   @Action async refreshSession(): Promise<void> {
-    const result = await axios.get("api/auth");
+    const result = await axios.get(apiUrl + "/auth");
     const data = result.data;
     if (data.isSigned === false) {
       this.setSign(false);

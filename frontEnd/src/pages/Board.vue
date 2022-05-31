@@ -31,13 +31,14 @@ import Table from "../components/Table.vue";
 import axios from "axios";
 import { Post } from "@/store/entity";
 import { useRouter } from "vue-router";
+import { apiUrl } from "@/utils";
 @Options({ components: { Table, Card } })
 export default class Board extends Vue {
   pages: Array<Post> = [];
   router = useRouter();
   async beforeMount() {
     try {
-      let response = await axios.get("/api/post");
+      let response = await axios.get(apiUrl + "/post");
       let posts: Array<Post> = response.data.posts;
       posts.forEach((post) => {
         this.pages.push(post);

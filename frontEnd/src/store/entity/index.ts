@@ -11,3 +11,9 @@ export interface Post {
   date: string;
   id: string;
 }
+export interface Comment {
+  author: string;
+  comment: string;
+  date: string;
+  id: string;
+}

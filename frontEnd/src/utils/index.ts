@@ -12,3 +12,4 @@ export const markedOption: MarkedOptions = {
 };
 
 export const primaryColor = "#416389";
+export const apiUrl = "http://localhost:8000/api";

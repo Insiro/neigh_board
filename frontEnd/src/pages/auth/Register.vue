@@ -63,6 +63,8 @@ import { Options, Vue } from "vue-class-component";
 import UserInput from "@/components/input/UserInput.vue";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "vue-router";
+import { apiUrl } from "@/utils";
+
 @Options({ components: { UserInput } })
 export default class Component extends Vue {
   id_str = "";
@@ -89,7 +91,7 @@ export default class Component extends Vue {
     data.append("user_name", this.name);
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     try {
-      await axios.post("/api/register", data);
+      await axios.post(apiUrl + "/register", data);
       alert("회원가입에 성공하였습니다");
       useRouter().push("/auth");
     } catch (error) {
