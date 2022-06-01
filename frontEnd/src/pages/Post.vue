@@ -9,9 +9,8 @@
     <!--eslint-disable-next-line vue/no-v-html-->
     <div id="marked" class="marked mt-5" v-html="postText"></div>
     <hr />
-    <CardB>
+    <CardB v-if="isSigned">
       <UserInput
-        v-if="isSigned"
         :value="newComment"
         class="editComment"
         @updates="newCommentChanged"
