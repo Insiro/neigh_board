@@ -28,10 +28,12 @@ import { Vue, Options } from "vue-class-component";
 import UserInput from "@/components/input/UserInput.vue";
 import axios from "axios";
 import { apiUrl } from "@/utils";
+import { useRouter } from "vue-router";
 @Options({ components: { UserInput } })
 export default class NewPost extends Vue {
   title = "";
   content = "";
+  router = useRouter();
   onTitleChanged(title: string) {
     this.title = title;
   }
@@ -39,13 +41,16 @@ export default class NewPost extends Vue {
     if (this.title === this.content && this.content === "") return;
     let data = {
       title: this.title,
-      conent: this.content,
+      content: this.content,
     };
     try {
-      await axios.post(apiUrl + "/post", data);
+      let ret = await axios.post(apiUrl + "/post", data);
+      alert("계시글 등록이 완료되었습니다");
+      this.router.push("/post/" + ret.data.post.id);
+      console.log(ret.data.post.id);
       this.title = "";
       this.content = "";
-      alert("계시글 등록이 완료되었습니다");
+      return;
     } catch (error) {}
     alert("계시글 등록에 실패하였습니다");
   }

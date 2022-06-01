@@ -36,23 +36,26 @@ export default class Component extends Vue {
     date: "",
     id: "",
   };
+  router = useRouter();
+  valid = false;
   comments: Comment[] = [];
   get post(): Post {
     return this.m_post;
   }
-  async beforeMount() {
+  async mounted() {
     let id = useRoute().params.id.toString();
     try {
       let result = await axios.get(apiUrl + "/post/" + id);
       this.m_post = result.data.post as Post;
       this.m_post.id = id;
-      if (id === "") return;
-      let comm_result = await axios.get(apiUrl + "/post/" + id + "/comment");
-      this.comments = comm_result.data.comments as Comment[];
-    } catch (error) {}
-  }
-  activated() {
-    if (this.m_post.id === "") useRouter().push("/404");
+      if (id === "" || result.status > 399) throw new Error();
+      try {
+        let comm_result = await axios.get(apiUrl + "/post/" + id + "/comment");
+        this.comments = comm_result.data.comments as Comment[];
+      } catch (_) {}
+    } catch (error) {
+      if (!this.valid) this.router.push("/404");
+    }
   }
   get postText(): string {
     return marked(this.m_post.content ?? "");

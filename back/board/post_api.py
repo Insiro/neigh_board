@@ -18,15 +18,18 @@ class PostController(View):
         user_id = self.request.session["id"]
         author = User.objects.get(user_id=user_id)
         region = Region.objects.get(name=request.session['region'])
-        Post.objects.create(
+        post = Post.objects.create(
             author=author,
             region=region,
             title=body.get("title"),
             content=body.get("content"),
             likes=0,
             date=datetime.today()
-        ).save()
-        return JsonResponse({"result": "success"}, json_dumps_params={"ensure_ascii": False})
+        )
+        id = post.board_id
+        post_data = model_to_dict(post)
+        post_data["id"] = id
+        return JsonResponse({"result": "success", "post": post_data}, json_dumps_params={"ensure_ascii": False})
 
     def get(self, request, *args, **kwargs):
         all_post = []
