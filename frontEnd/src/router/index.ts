@@ -51,10 +51,6 @@ const authRoutes: Array<RouteRecordRaw> = [
     component: Post,
   },
   {
-    path: "/user",
-    component: User,
-  },
-  {
     path: "/user/:id",
     component: User,
   },

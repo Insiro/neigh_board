@@ -108,7 +108,7 @@ export default class NavBar extends Vue {
     return authState.user;
   }
   moveUserInfo() {
-    this.router.push("/user");
+    this.router.push("/user/" + authState.user.id);
   }
 }
 </script>

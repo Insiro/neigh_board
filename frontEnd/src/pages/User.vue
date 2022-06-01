@@ -29,30 +29,23 @@ export default class Component extends Vue {
     region: "",
     user_name: "",
   };
-  async mounted() {
+  async beforeMount() {
     let id = this.route.params.id;
-    if (id === undefined) {
-      this.update_self();
-      return;
-    }
     try {
       let result = await axios.get(apiUrl + "/user/" + id);
-      let user: UserFull = result.data.user;
-      this.m_user = user;
+      let user = result.data.user;
+      this.m_user.call = user.call;
+      this.m_user.id = user.id;
+      this.m_user.register = user.register;
+      this.m_user.region = user.region;
+      this.m_user.user_name = user.user_name;
+      console.log(this.m_user);
     } catch (error) {
       this.router.push("/404");
     }
   }
   get user(): UserFull {
     return this.m_user;
-  }
-  update_self() {
-    let id = authState.data.id;
-    try {
-      this.router.push("/user/" + id);
-    } catch (error) {
-      this.router.push("/404");
-    }
   }
 }
 </script>
