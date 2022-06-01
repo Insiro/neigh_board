@@ -54,13 +54,21 @@
           <img class="img-profile rounded-circle" src="/user.svg" />
         </template>
         <template #content>
-          <DropDownItem>
+          <DropDownItem
+            v-if="user.id !== '' && user.id !== undefined"
+            @click="moveUserInfo"
+          >
             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
             User Info
           </DropDownItem>
-          <DropDownItem @click="signOut()">
+          <DropDownItem
+            v-if="user.id !== '' && user.id !== undefined"
+            @click="sign()"
+          >
             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400" />
-            Logout
+            {{
+              user.id !== "" && user.id !== undefined ? "sign out" : "sign in"
+            }}
           </DropDownItem>
         </template>
       </DropDown>
@@ -92,12 +100,15 @@ import authState from "@/store/auth/state";
 })
 export default class NavBar extends Vue {
   router = useRouter();
-  signOut() {
+  sign() {
     authState.signOut();
     this.router.push("/auth");
   }
   get user(): User {
     return authState.user;
+  }
+  moveUserInfo() {
+    this.router.push("/user");
   }
 }
 </script>
