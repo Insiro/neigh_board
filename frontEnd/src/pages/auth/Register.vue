@@ -53,7 +53,9 @@
           @updates="regionChanged"
         />
         <hr />
-        <button class="btn btn-primary btn-user btn-block">Regist</button>
+        <button class="btn btn-primary btn-user btn-block" @click="">
+          Regist
+        </button>
       </form>
     </div>
   </div>
@@ -64,6 +66,7 @@ import UserInput from "@/components/input/UserInput.vue";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "vue-router";
 import { apiUrl } from "@/utils";
+import authState from "@/store/auth/state";
 
 @Options({ components: { UserInput } })
 export default class Component extends Vue {
@@ -73,6 +76,7 @@ export default class Component extends Vue {
   name = "";
   call = "";
   region = "";
+  router = useRouter();
   async regist() {
     if (this.pass_str !== this.pass_strChk) return;
     if (
@@ -93,7 +97,7 @@ export default class Component extends Vue {
     try {
       await axios.post(apiUrl + "/register", data);
       alert("회원가입에 성공하였습니다");
-      useRouter().push("/auth");
+      this.router.push("/auth");
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status === 409) {
@@ -103,6 +107,9 @@ export default class Component extends Vue {
       }
       alert("회원가입에 실패하였습니다");
     }
+  }
+  mounted() {
+    if (authState.isSigned === true) useRouter().push("/");
   }
   idChanged(data: string) {
     this.id_str = data;

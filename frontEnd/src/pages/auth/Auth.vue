@@ -58,6 +58,7 @@ export default class Component extends Vue {
   router = useRouter();
   id = "";
   pwd = "";
+
   async signIn() {
     try {
       const result = await authState.signIn({
@@ -71,7 +72,9 @@ export default class Component extends Vue {
     }
     //TODO:
   }
-
+  mounted() {
+    if (authState.isSigned === true) useRouter().push("/");
+  }
   idChanged(data: string) {
     this.id = data;
   }
