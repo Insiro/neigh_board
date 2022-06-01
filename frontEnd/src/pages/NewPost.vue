@@ -18,7 +18,9 @@
           placeholder="게시글을 입력하세요"
         />
       </div>
-      <button class="mt-5 postItem" @click="submitPost">게시</button>
+      <StyledButton class="mt-5 postItem" @click="submitPost">
+        게시
+      </StyledButton>
     </div>
     <div class="flex-grow-1" />
   </div>
@@ -29,7 +31,8 @@ import UserInput from "@/components/input/UserInput.vue";
 import axios from "axios";
 import { apiUrl } from "@/utils";
 import { useRouter } from "vue-router";
-@Options({ components: { UserInput } })
+import StyledButton from "@/components/StyledButton.vue";
+@Options({ components: { UserInput, StyledButton } })
 export default class NewPost extends Vue {
   title = "";
   content = "";
