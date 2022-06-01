@@ -2,6 +2,13 @@ export interface User {
   name: string;
   id: string;
 }
+export interface UserFull {
+  call: string;
+  id: string;
+  register: string;
+  region: string;
+  user_name: string;
+}
 export interface Post {
   author: string;
   title: string;

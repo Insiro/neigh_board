@@ -53,9 +53,10 @@ const authRoutes: Array<RouteRecordRaw> = [
   {
     path: "/user",
     component: User,
-    meta: {
-      auth_require: true,
-    },
+  },
+  {
+    path: "/user/:id",
+    component: User,
   },
   {
     path: "/license",

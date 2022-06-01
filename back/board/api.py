@@ -17,6 +17,9 @@ def get_user_info(request, user_id):
                 "region": user_obj.region.name,
                 "user_name": user_obj.user_name
             }
+            if "id" in request.session and request.session["id"] == user_id:
+                user["call"] = user_obj.phone
+            user["id"] = user_id
         return JsonResponse({"user":  user}, json_dumps_params={"ensure_ascii": False})
     return HttpError("NotFound", 404).send()
 
