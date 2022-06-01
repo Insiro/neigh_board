@@ -11,25 +11,12 @@
     </button>
 
     <!-- Topbar Search -->
-    <form
-      class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-    >
-      <Search />
-    </form>
+    
 
     <!-- Topbar Navbar -->
     <ul class="navbar-nav ml-auto">
       <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-      <DropDown class="searchItem">
-        <template #default>
-          <i class="fas fa-search fa-fw"></i>
-        </template>
-        <template #content>
-          <form class="form-inline mr-auto w-100 navbar-search">
-            <Search />
-          </form>
-        </template>
-      </DropDown>
+      
 
       <DropDown counter="3">
         <template #default>
